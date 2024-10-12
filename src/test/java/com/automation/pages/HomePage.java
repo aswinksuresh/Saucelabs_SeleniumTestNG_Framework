@@ -68,10 +68,7 @@ public class HomePage extends BasePage{
         zaSortBtn.click();
     }
 
-    public boolean isSorted() {
-       Collections.reverse(sortedProducts);
-       return sortedProducts.equals(products);
-    }
+
 
     public List<WebElement> getAllProducts() {
         return products;
