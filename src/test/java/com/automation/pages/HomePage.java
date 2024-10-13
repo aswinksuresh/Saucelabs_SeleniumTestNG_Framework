@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -30,13 +31,16 @@ public class HomePage extends BasePage{
 
    @FindBy(xpath = "//div[@class=\"inventory_item_name \"]")
    List<WebElement> products;
-   List<WebElement> sortedProducts;
+
 
     @FindBy(xpath = "//div[@class=\"inventory_item_price\"]")
     List<WebElement> productPrices;
 
     @FindBy(xpath = "//option[@value=\"hilo\"]")
     WebElement hiloSortBtn;
+
+    List<WebElement> aTozSortedProducts;
+    List<WebElement> zToaSortedProducts;
 
 
 
@@ -64,15 +68,20 @@ public class HomePage extends BasePage{
         logOutBtn.click();
     }
     public void doZtoASort(){
+
+       aTozSortedProducts = products;
         sortBtn.click();
         zaSortBtn.click();
     }
+    public boolean isSortedFromZtoA(){
+        zToaSortedProducts = products;
+        Collections.reverse(aTozSortedProducts);
+        return aTozSortedProducts.equals(zToaSortedProducts);
 
-
-
-    public List<WebElement> getAllProducts() {
-        return products;
     }
+
+
+
     public void doPriceSortHighToLow(){
         sortBtn.click();
         hiloSortBtn.click();
@@ -102,4 +111,7 @@ public class HomePage extends BasePage{
         return removeItemBtnList.isEmpty();
    }
 
+    public List<WebElement> getAllProducts() {
+        return products;
+    }
 }
